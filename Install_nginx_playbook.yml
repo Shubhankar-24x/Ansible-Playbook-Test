@@ -1,0 +1,16 @@
+-
+  name: Install Nginx and Start It
+  hosts: servers
+  become: yes                     # Root User Privileges
+  tasks:
+    - name: Install Nginx
+      apt:                        # Package manager for Debian/Ubuntu
+        name: nginx               # Specify the package name
+        state: latest             # Ensure the latest version is installed
+    
+    - name: Ensure Nginx is running
+      service:                    # Manage the service
+       name: nginx
+       state: started
+       enabled: yes               # Ensure it starts on boot
+       

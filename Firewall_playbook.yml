@@ -1,0 +1,15 @@
+---
+- name: Firewall Configuration Playbook
+  hosts: servers
+  
+  tasks:
+    - name: Enable a service in firewalld
+      firewalld:
+        port: 80/tcp  # Port to be opened
+        permanent: true  # Make the change permanent
+        state: enabled  # Enable the service
+
+    - name: Reload the firewalld
+      service:
+        name: firewalld  # Name of the service to be reloaded
+        state: reloaded  # Reload the service to apply changes

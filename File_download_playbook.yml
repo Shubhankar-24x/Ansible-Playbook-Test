@@ -1,0 +1,14 @@
+---
+- name: Download Files 
+  hosts: servers
+
+  tasks:
+    - name: Download file 
+      get_url:
+        url: http://example.com/file.txt  # URL of the file to download
+        dest: /home/ubuntu/downloads/  # Destination path on the local server
+        mode: '0644'  # Permissions for the downloaded file
+        owner: ubuntu  # Owner of the file
+        group: User  # Group of the file
+        backup: true  # Backup the file before downloading
+  

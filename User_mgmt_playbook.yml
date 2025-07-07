@@ -1,0 +1,36 @@
+---
+- name: User Management Playbook
+  # This playbook manages user accounts on remote servers.
+  hosts: servers
+  
+  tasks:
+    - name: Create a new user
+      user:
+        name: paul  # Name of the user to be created
+        comment: "Paul User for Dev team"  # Description of the user
+        home: /home/paul  # Home directory for the user
+        shell: /bin/bash  # Set the user's shell
+        group: dev  # Add the user to the dev group
+        groups: qa,prd  # Add the user to multiple groups
+
+    - name: Remove a user
+      user:
+        name: paul
+        state: absent  # Ensure the user is removed
+        remove: yes # Remove the user's home directory and files
+
+    - name: Modify an existing user
+      user:
+        name: existinguser # Name of the user to be modified
+        comment: "Updated User Comment"  # Update the user's comment
+        shell: /bin/zsh  # Change the user's shell
+
+    - name: Lock a user account
+      user:
+        name: lockeduser
+        state: locked  # Lock the user account
+
+    - name: Unlock a user account
+      user:
+        name: unlockeduser
+        state: present  # Ensure the user account is unlocked

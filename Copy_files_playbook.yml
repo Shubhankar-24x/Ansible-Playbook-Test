@@ -1,0 +1,14 @@
+---
+- name: Copying Files Remotely
+  hosts: servers
+  become: yes                     # Root User Privileges
+
+  tasks: 
+    - name: Copy files to remote server
+      copy:
+        src: /home/ubuntu/hello.txt  # Source file on the local machine
+        dest: /home/ubuntu/files  # Destination path on the remote server
+        owner: ubuntu
+        group: User
+        mode: 0777 # Permissions for the file ( Another: ugo=rw)
+        backup: true  # Backup the file before copying

@@ -1,0 +1,42 @@
+---
+- name: File Modules Examples Playbook
+  hosts: servers
+ 
+  tasks: 
+    - name: Creating a File
+      file:
+        path: /home/ubuntu/newfile.txt # Path to the file that will be created
+        state: touch  # Create an empty file if it does not exist
+        
+        # [ state: absent ]  # Ensure the file does not exist
+        
+        owner: ubuntu  # Owner of the file
+        group: User  # Group of the file
+        mode: u=rwx,g=rw,o=r  # Permissions for the file
+    
+
+    - name: Creating a Directory
+      file:
+        path: /home/ubuntu/newdir  # Path to the directory that will be created
+        state: directory  # Create a directory
+
+
+    - name: Removing a File
+      file:
+        path: /home/ubuntu/newfile.txt  # Path to the file that will be removed
+        state: absent  # Ensure the file does not exist
+
+
+    - name: Removing a Directory
+      file:
+        path: /home/ubuntu/newdir  # Path to the directory that will be removed
+        state: absent  # Ensure the directory does not exist
+
+
+    - name: Changing File Permissions
+      file:
+        path: /home/ubuntu/newfile.txt  # Path to the file whose permissions will be changed
+        mode: u=rwx,g=rw,o=r  # New permissions for the file
+
+
+    

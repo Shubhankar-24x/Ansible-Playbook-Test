@@ -1,0 +1,49 @@
+---
+
+- name: Cronjob Playbook
+  hosts: servers
+
+  tasks:
+    - name: Add  Cron Job
+      cron:
+        name: Run Test Script
+        minute: 30
+        hour: 18
+        day: 15
+        month: "*" # Month is set to all months
+        weekday: "7" # 7 represents Sunday
+        job: /home/ubuntu/test.sh 
+
+
+    - name: Remove Cron Job
+      cron:
+        name: Run Test Script
+        state: absent # Ensure the cron job is removed
+        user: ubuntu # Specify the user for the cron job
+
+
+    - name: Modify Cron Job
+      cron:
+        name: Run Test Script
+        minute: 45 # Change the minute to 45
+        hour: 20 # Change the hour to 20
+        job: /home/ubuntu/test.sh # Ensure the job command is correct
+        user: ubuntu # Specify the user for the cron job
+        
+        
+    - name: Disable Cron Job
+      cron:
+        name: Run Test Script
+        user: ubuntu # Specify the user for the cron job
+        disabled: yes # Disable the cron job
+
+
+    - name: Adding Environment Variables to Cron Job
+      cron:
+        name: VAR # Environment variable name
+        env: yes
+        user: ubuntu
+        job: /home/ubuntu/test.sh
+        insertbefore: Var2 # Insert before the specified var2 variable
+        # [ insertafter: Var2 ] # Insert after the specified var2 variable
+        state: present # Ensure the environment variable is present

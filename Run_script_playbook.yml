@@ -1,0 +1,11 @@
+---
+
+- name: Run a Script
+  hosts: servers
+ 
+  tasks:
+    - name: Run  script on the remote server
+      shell: ./script.sh  >> test.log # Append output to test.log
+      args:
+        chdir: /home/ubuntu  # Change directory to where the script is located
+        creates:  test.log  # If file does not exist, create it

@@ -8,8 +8,11 @@
         port: 80/tcp  # Port to be opened
         permanent: true  # Make the change permanent
         state: enabled  # Enable the service
-
-    - name: Reload the firewalld
+      notify:
+        - Reload firewalld  # Notify handler to reload firewalld after changes
+    
+  handlers:
+    - name: Reload firewalld
       service:
         name: firewalld  # Name of the service to be reloaded
         state: reloaded  # Reload the service to apply changes

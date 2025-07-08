@@ -14,7 +14,7 @@
 
     - name: Ensure Nginx is running
       service:   
-       name: "{{items}}" # Manage the service
+       name: "{{item}}" # Manage the service
 
      # name: "{{app}}"  # Use the variable for the application name
        state: started

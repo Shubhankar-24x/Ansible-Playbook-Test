@@ -6,12 +6,18 @@
   tasks:
     - name: Create a new user
       user:
-        name: paul  # Name of the user to be created
+        name: "{{ item }}"  # Name of the user to be created
         comment: "Paul User for Dev team"  # Description of the user
         home: /home/paul  # Home directory for the user
         shell: /bin/bash  # Set the user's shell
         group: dev  # Add the user to the dev group
         groups: qa,prd  # Add the user to multiple groups
+
+      loop:
+        - Raju 
+        - Sham   
+        - Baburao  
+
 
     - name: Remove a user
       user:

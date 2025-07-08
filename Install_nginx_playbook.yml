@@ -2,6 +2,7 @@
   name: Install Nginx and Start It
   hosts: servers
   vars:
+    - apps: [yum,httpd,telnet]  # List of applications to be installed
     - app: nginx  # Variable for the application name
   become: yes                     # Root User Privileges
   tasks:
@@ -12,8 +13,12 @@
       tags: i-nginx # Tag for Nginx installation
 
     - name: Ensure Nginx is running
-      service:                    # Manage the service
-       name: "{{app}}"  # Use the variable for the application name
+      service:   
+       name: "{{items}}" # Manage the service
+
+     # name: "{{app}}"  # Use the variable for the application name
        state: started
        enabled: yes               # Ensure it starts on boot
       tags: ss-nginx # Tag for Nginx service management
+      with_items: "{{ apps }}"  # Loop through the list of applications
+      
